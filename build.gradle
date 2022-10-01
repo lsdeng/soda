@@ -1,0 +1,58 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+buildscript {
+    apply from: './dep.gradle'
+    repositories {
+        maven {
+            url 'https://maven.aliyun.com/repository/public/'
+        }
+        maven {
+            url 'https://maven.aliyun.com/repository/spring/'
+        }
+        maven {
+            url 'https://maven.aliyun.com/repository/google/'
+        }
+        google()
+        maven {
+            url "/Users/saidengliu/hiy/pluginP/hiyPlugin/repo"
+        }
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:${versions.agp}"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin_version}"
+        classpath "com.hiy.plugin:hiyPlugin:0.0.2"
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        maven {
+            url 'https://maven.aliyun.com/repository/public/'
+        }
+        maven {
+            credentials {
+                username '632205d7287a2b849f0aa5e0'
+                password 'P6i2XfJAojyX'
+            }
+            url 'https://packages.aliyun.com/maven/repository/2278042-release-HbC1CR/'
+        }
+        maven {
+            credentials {
+                username '632205d7287a2b849f0aa5e0'
+                password 'P6i2XfJAojyX'
+            }
+            url 'https://packages.aliyun.com/maven/repository/2278042-snapshot-eMpKJL/'
+        }
+        maven {
+            url 'https://maven.aliyun.com/repository/google/'
+        }
+        google()
+        jcenter()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
