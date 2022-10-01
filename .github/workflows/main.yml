@@ -45,4 +45,4 @@ jobs:
         with:
          artifacts: "./app/build/outputs/apk/debug/app-debug.apk"
          bodyFile: "readme.md"
-         token: ${{ secrets.YOUR_GITHUB_TOKEN }}
+         token: "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"
