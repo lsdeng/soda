@@ -12,6 +12,9 @@ buildscript {
             url 'https://maven.aliyun.com/repository/google/'
         }
         google()
+        maven {         // 添加Maven仓库地址
+            url 'http://maven.aliyun.com/nexus/content/repositories/releases/'
+        }
         maven {
             url "/Users/saidengliu/hiy/pluginP/hiyPlugin/repo"
         }
@@ -19,6 +22,8 @@ buildscript {
     dependencies {
         classpath "com.android.tools.build:gradle:${versions.agp}"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin_version}"
+        // 添加emas-services插件
+        classpath 'com.aliyun.ams:emas-services:1.0.1'
 //        classpath "com.hiy.plugin:hiyPlugin:0.0.2"
 
         // NOTE: Do not place your application dependencies here; they belong
@@ -47,6 +52,9 @@ allprojects {
         }
         maven {
             url 'https://maven.aliyun.com/repository/google/'
+        }
+        maven {         // 添加Maven仓库地址
+            url 'http://maven.aliyun.com/nexus/content/repositories/releases/'
         }
         google()
         jcenter()
