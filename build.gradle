@@ -3,7 +3,7 @@ buildscript {
     apply from: './dep.gradle'
     repositories {
         google()
-        MavenCentral()
+        mavenCentral()
         maven {
             url 'https://maven.aliyun.com/repository/public/'
         }
@@ -21,7 +21,7 @@ buildscript {
 allprojects {
     repositories {
         google()
-        MavenCentral()
+        mavenCentral()
         maven {
             url 'https://maven.aliyun.com/repository/public/'
         }
