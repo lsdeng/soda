@@ -6,9 +6,9 @@ plugins {
     id 'hiyplugin'
 }
 
-greeting {
-
-}
+//greeting {
+//
+//}
 
 ext.isCI = {
     def key = "CI"
