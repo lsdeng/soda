@@ -3,7 +3,6 @@ package com.hiy.soda.vm
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.room.Room
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.hiy.soda.SodaApp
@@ -11,7 +10,6 @@ import com.hiy.soda.bean.common.RollResDTO
 import com.hiy.soda.bean.common.RollResListDTO
 import com.hiy.soda.bean.dto.RollGoods
 import com.hiy.soda.bean.dto.RollImg
-import com.hiy.soda.dao.RollDatabase
 import com.hiy.soda.helper.SodaConstant
 import okhttp3.*
 import java.io.IOException
@@ -32,12 +30,6 @@ class RollVm : ViewModel() {
             .build()
     }
 
-    val rollDb by lazy {
-        Room
-            .databaseBuilder(SodaApp.application.applicationContext, RollDatabase::class.java, "roll")
-            .build()
-    }
-
     lateinit var appId: String
 
     lateinit var appSecret: String
@@ -48,28 +40,12 @@ class RollVm : ViewModel() {
 
 
     fun attachGoods() {
-        Thread {
-            rollDb.rollGoodsDao()?.getAll().apply {
-                goods.postValue(this)
-                try {
-                    goods.value = this
-                } catch (e: Exception) {
-
-                }
-            }
-        }.start()
-
     }
 
     fun getBarcodeGoodsDetails(barcode: String) {
         appId = SodaConstant.roll_app_id
         appSecret = SodaConstant.roll_app_secret
 
-        Thread {
-            rollDb.rollGoodsDao()?.getAll()?.let {
-                Log.d("lsd-findAll", Gson().toJson(it))
-            }
-        }.start()
         val httpUrl = HttpUrl.Builder()
             .scheme("https")
             .host("www.mxnzp.com")
@@ -91,7 +67,6 @@ class RollVm : ViewModel() {
                 val goodsRet = Gson().fromJson<RollResDTO<RollGoods>>(ret, object : TypeToken<RollResDTO<RollGoods>>() {}.type)
                 if (goodsRet.code == 1) {
                     Log.d("lsd", goodsRet.data?.goodsName ?: "")
-                    goodsRet.data?.let { rollDb.rollGoodsDao()?.insertAll(it) }
                 } else {
                     Log.d("lsd", goodsRet.msg ?: "")
                 }

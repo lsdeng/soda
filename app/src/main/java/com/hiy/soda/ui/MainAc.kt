@@ -36,7 +36,7 @@ class MainAc : AppCompatActivity() {
     private lateinit var mRv: RecyclerView;
     private val mGoodsList = mutableListOf<RollGoods>()
 
-    val handler = object : Handler(Looper.getMainLooper(), Callback { true }) {
+    private val handler = object : Handler(Looper.getMainLooper(), Callback { true }) {
         override fun handleMessage(msg: Message) {
             super.handleMessage(msg)
         }
@@ -119,7 +119,7 @@ class MainAc : AppCompatActivity() {
 
         rollVm.girls.observe(this) {
             it.firstOrNull()?.let { url ->
-                Glide.with(this@MainAc).load(url.imageUrl).into(girlIv)
+//                Glide.with(this@MainAc).load(url.imageUrl).into(girlIv)
             }
         }
     }
