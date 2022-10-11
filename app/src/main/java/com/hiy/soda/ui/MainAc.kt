@@ -17,7 +17,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.*
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.hiy.monbie.core.HiyHelper
 import com.hiy.soda.R
 import com.hiy.soda.bean.dto.RollGoods
@@ -54,6 +53,7 @@ class MainAc : AppCompatActivity() {
         initListener()
 
         loadData()
+//        Log.d("lsd", "$HiyHelper.tag")
 
 
         handler.sendMessage(Message.obtain())
@@ -72,10 +72,14 @@ class MainAc : AppCompatActivity() {
         val threadLocalValue = ThreadLocal<Int>()
         threadLocalValue.set(6)
 
-        findViewById<View>(R.id.tv).setOnClickListener {
-            //跳转的默认扫码界面
-            //跳转的默认扫码界面
-            startActivityForResult(Intent(this@MainAc, CaptureActivity::class.java), 1)
+        findViewById<TextView>(R.id.tv).apply {
+            text = HiyHelper.tag
+            setOnClickListener {
+                //跳转的默认扫码界面
+                //跳转的默认扫码界面
+                startActivityForResult(Intent(this@MainAc, CaptureActivity::class.java), 1)
+            }
+
         }
 
 

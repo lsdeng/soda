@@ -3,12 +3,10 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-parcelize'
     id 'kotlin-kapt'
-    id 'hiyplugin'
+//    id 'hiyplugin'
 }
 
-greeting {
- System.out.println("call  greeting")
-}
+
 
 ext.isCI = {
     def key = "CI"

@@ -1,0 +1,5 @@
+rootProject.name = 'hiyPlugin'
+
+include ':hiyPlugin'
+project(":hiyPlugin").projectDir = new File('/Users/saidengliu/hiy/pluginP/hiyPlugin/plugin')
+

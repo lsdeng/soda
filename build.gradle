@@ -34,7 +34,7 @@ buildscript {
     dependencies {
         classpath "com.android.tools.build:gradle:${versions.agp}"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin_version}"
-        classpath "com.hiy.plugin:hiyPlugin:5.0.0-SNAPSHOT"
+//        classpath "com.hiy.plugin:hiyPlugin:5.0.0-SNAPSHOT"
     }
 }
 

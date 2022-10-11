@@ -3,6 +3,3 @@ include ':app'
 
 include ':sodacore'
 
-//include ':hiyPlugin'
-//project(":hiyPlugin").projectDir = new File('/Users/saidengliu/hiy/pluginP/hiyPlugin/plugin')
-
