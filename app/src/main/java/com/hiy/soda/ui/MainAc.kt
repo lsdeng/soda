@@ -2,12 +2,11 @@ package com.hiy.soda.ui
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.Intent
-import android.os.Bundle
-import android.os.Handler
+import android.os.*
 import android.os.Handler.Callback
-import android.os.Looper
-import android.os.Message
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -29,7 +28,6 @@ import com.permissionx.guolindev.PermissionX
 
 
 class MainAc : AppCompatActivity() {
-
 
     private lateinit var girlIv: ImageView
     private lateinit var mRootView: View
@@ -96,7 +94,7 @@ class MainAc : AppCompatActivity() {
         var i = 0
         i++
         rollVm.attachGoods()
-        rollVm.getGirlList()
+//        rollVm.getGirlList()
     }
 
     override fun onResume() {
@@ -124,9 +122,11 @@ class MainAc : AppCompatActivity() {
         }
     }
 
+
     private fun initView() {
         val titleTv : TextView= findViewById(R.id.tv)
         titleTv.text = HiyHelper.tag
+
         mRv = findViewById(R.id.rv)
         girlIv = findViewById(R.id.girl_iv)
         mRv.adapter = object : RecyclerView.Adapter<GoodsViewHolder>() {
@@ -149,6 +149,19 @@ class MainAc : AppCompatActivity() {
         mRootView.post {
 
         }
+
+        titleTv.setOnClickListener {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                val channel = NotificationChannel("111", "ceshi", NotificationManager.IMPORTANCE_HIGH)
+                channel.description = "111"
+
+                val notifyManager = this@MainAc.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+                notifyManager.createNotificationChannel(channel)
+            } else {
+            }
+
+        }
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -158,7 +171,7 @@ class MainAc : AppCompatActivity() {
                 1 -> {
                     CameraScan.parseScanResult(data)?.let {
                         Log.d("lsd11", it)
-                        rollVm.getBarcodeGoodsDetails(it)
+//                        rollVm.getBarcodeGoodsDetails(it)
                     }
                 }
             }

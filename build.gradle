@@ -2,6 +2,9 @@
 buildscript {
     apply from: './dep.gradle'
     repositories {
+        maven {
+            url "${rootDir}/repo"
+        }
         mavenCentral()
         maven {
             url 'https://maven.aliyun.com/repository/public/'
