@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.hiy.soda.SodaApp
 import com.hiy.soda.bean.common.RollResDTO
 import com.hiy.soda.bean.common.RollResListDTO
 import com.hiy.soda.bean.dto.RollGoods
