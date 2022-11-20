@@ -3,20 +3,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.hiy.soda">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:name=".SodaApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config_debug"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:networkSecurityConfig="@xml/network_security_config_debug"
         android:theme="@style/Theme.Soda"
         tools:targetApi="n">
-        <activity android:name=".ui.MainAc"
+        <activity
+            android:name=".ui.RvAc"
+            android:exported="false" />
+        <activity
+            android:name=".ui.MainAc"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,9 +28,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.king.zxing.CaptureActivity"
-            android:exported="true">
-        </activity>
+        <activity
+            android:name="com.king.zxing.CaptureActivity"
+            android:exported="true"/>
     </application>
 
 </manifest>

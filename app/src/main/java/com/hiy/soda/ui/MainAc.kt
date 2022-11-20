@@ -8,24 +8,28 @@ import android.content.Intent
 import android.os.*
 import android.os.Handler.Callback
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.*
 import androidx.recyclerview.widget.RecyclerView
+import com.alibaba.android.arouter.facade.annotation.Route
+import com.alibaba.android.arouter.launcher.ARouter
+import com.drakeet.multitype.MultiTypeAdapter
 import com.hiy.monbie.core.HiyHelper
+import com.hiy.monbie.ui.ConstantUI
 import com.hiy.soda.R
+import com.hiy.soda.bean.bo.OptionBo
 import com.hiy.soda.bean.dto.RollGoods
+import com.hiy.soda.ui.adapter.OptionItemViewBinder
 import com.hiy.soda.vm.RollVm
 import com.king.zxing.CameraScan
 import com.king.zxing.CaptureActivity
 import com.permissionx.guolindev.PermissionX
 
-
+@Route(path = "/main/main")
 class MainAc : AppCompatActivity() {
 
     private lateinit var girlIv: ImageView
@@ -73,7 +77,6 @@ class MainAc : AppCompatActivity() {
         threadLocalValue.set(6)
 
         findViewById<TextView>(R.id.tv).apply {
-            text = HiyHelper.tag
             setOnClickListener {
                 //跳转的默认扫码界面
                 //跳转的默认扫码界面
@@ -126,29 +129,20 @@ class MainAc : AppCompatActivity() {
         }
     }
 
+    val list : MutableList<Any> = mutableListOf()
 
     private fun initView() {
+        ARouter.init(this@MainAc.application)
         val titleTv : TextView= findViewById(R.id.tv)
-        titleTv.text = HiyHelper.tag
+        titleTv.text = "${HiyHelper.tag}-${ConstantUI.TAG}"
 
         mRv = findViewById(R.id.rv)
         girlIv = findViewById(R.id.girl_iv)
-        mRv.adapter = object : RecyclerView.Adapter<GoodsViewHolder>() {
-            override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GoodsViewHolder {
-                val view = LayoutInflater.from(parent.context).inflate(GoodsViewHolder.getLayoutId(), parent, false)
-                return GoodsViewHolder(view)
-            }
 
-            override fun onBindViewHolder(holder: GoodsViewHolder, position: Int) {
-                holder.fillData(mGoodsList[position])
-            }
-
-            override fun getItemCount(): Int {
-                return mGoodsList.size
-            }
-
-        }
-
+        list.add(OptionBo("rv", "RecyclerView"))
+        val adapter = MultiTypeAdapter(list)
+        adapter.register(OptionBo::class.java, OptionItemViewBinder())
+        mRv.adapter = adapter
         mRootView = findViewById(R.id.root_view)
         mRootView.post {
 

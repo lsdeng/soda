@@ -1,0 +1,8 @@
+com/alibaba/android/arouter/routes/ARouter$$Group$$main.java
+ com.alibaba.android.arouter.routes.ARouter$$Group$$main
+com/hiy/monbie/ui/BuildConfig.java
+ com.hiy.monbie.ui.BuildConfig
+com/alibaba/android/arouter/routes/ARouter$$Root$$sodaui.java
+ com.alibaba.android.arouter.routes.ARouter$$Root$$sodaui
+com/alibaba/android/arouter/routes/ARouter$$Providers$$sodaui.java
+ com.alibaba.android.arouter.routes.ARouter$$Providers$$sodaui
