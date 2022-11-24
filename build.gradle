@@ -2,19 +2,39 @@
 buildscript {
     apply from: './dep.gradle'
     repositories {
-        google()
+        maven {
+            url "${rootDir}/repo"
+        }
         mavenCentral()
         maven {
             url 'https://maven.aliyun.com/repository/public/'
         }
         maven {
+            url 'https://maven.aliyun.com/repository/google/'
+        }
+        maven {
             url "/Users/saidengliu/hiy/pluginP/hiyPlugin/repo"
         }
+        maven {
+            credentials {
+                username '632205d7287a2b849f0aa5e0'
+                password 'P6i2XfJAojyX'
+            }
+            url 'https://packages.aliyun.com/maven/repository/2278042-release-HbC1CR/'
+        }
+        maven {
+            credentials {
+                username '632205d7287a2b849f0aa5e0'
+                password 'P6i2XfJAojyX'
+            }
+            url 'https://packages.aliyun.com/maven/repository/2278042-snapshot-eMpKJL/'
+        }
+        google()
     }
     dependencies {
         classpath "com.android.tools.build:gradle:${versions.agp}"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin_version}"
-//        classpath "com.hiy.plugin:hiyPlugin:0.0.2"
+//        classpath "com.hiy.plugin:hiyPlugin:5.0.0-SNAPSHOT"
     }
 }
 

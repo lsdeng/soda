@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -10,7 +11,15 @@ android {
         targetSdkVersion 31
         versionCode 1
         versionName "1.0"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+            }
+        }
     }
+
+
+    resourcePrefix 'soda_core'
 
     buildTypes {
         release {
@@ -32,6 +41,9 @@ dependencies {
     implementation "androidx.core:core-ktx:${versions.core_ktx}"
     implementation "androidx.appcompat:appcompat:${versions.appcompat}"
     implementation "com.google.android.material:material:${versions.appcompat}"
+
+    // 解决livedata 数据倒灌
+    implementation 'com.kunminx.arch:unpeek-livedata:7.8.0'
 }
 
 

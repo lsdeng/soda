@@ -1,0 +1,2 @@
+com/hiy/monbie/ui/BuildConfig.java
+ com.hiy.monbie.ui.BuildConfig

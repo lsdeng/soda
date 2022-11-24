@@ -1,0 +1,14 @@
+rootProject.name = 'hiyPlugin'
+
+
+def pluginDir = new File("hiyPlugin")
+if (pluginDir.exists()) {
+    println("plugin 目录存在")
+    include ':hiyPlugin'
+    project(":hiyPlugin").projectDir = new File('/Users/saidengliu/hiy/pluginP/hiyPlugin/plugin')
+} else {
+    println("plugin 目录 不存在")
+}
+
+
+
