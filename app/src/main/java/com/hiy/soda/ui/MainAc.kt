@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.hiy.monbie.core.BaseActivity
 import com.hiy.monbie.core.HiyHelper
+import com.hiy.monbie.core.PageState
 import com.hiy.monbie.core.PageViewModel
 import com.hiy.soda.R
 import com.hiy.soda.bean.dto.RollGoods
@@ -46,6 +47,7 @@ class MainAc : BaseActivity<CountViewModel>() {
 
     override fun onViewCreated(decorView: View) {
         Log.d(HiyHelper.tag, "onViewCreated")
+        viewModel.loadData()
     }
 
 //
@@ -206,13 +208,15 @@ class CountViewModel : PageViewModel() {
     }
 
     override fun initData() {
-
+        super.initData()
     }
+
 
     fun loadData() {
         Thread {
             Thread.sleep(1000)
             count.postValue(1000)
+            dispatchPageState(PageState.Content)
         }.start()
     }
 }

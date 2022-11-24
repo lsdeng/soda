@@ -51,6 +51,8 @@ abstract class BaseActivity<T : PageViewModel> : AppCompatActivity() {
 
         initListener()
 
+        viewModel.initData()
+
         onViewCreated(findViewById(android.R.id.content))
     }
 }

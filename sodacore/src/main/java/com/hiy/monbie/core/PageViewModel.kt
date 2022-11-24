@@ -10,12 +10,7 @@ import com.kunminx.architecture.domain.message.MutableResult
  * created on :  2022/11/24 3:11 下午
  * desc:
  */
-open abstract class PageViewModel : BaseViewModel {
-
-    constructor() : super() {
-        pageState.value = PageState.Content
-        initDataInner()
-    }
+open abstract class PageViewModel : BaseViewModel() {
 
     private val pageState: MutableResult<PageState> = MutableResult.Builder<PageState>()
         .setAllowNullValue(false)
@@ -25,12 +20,13 @@ open abstract class PageViewModel : BaseViewModel {
         pageState.observe(lifecycleOwner, observer)
     }
 
-
-    private fun initDataInner() {
-        Log.d(HiyHelper.tag, "initDataInner ${pageState.value}")
-        initData()
+    fun dispatchPageState(value: PageState) {
+        pageState.postValue(value)
     }
 
-    protected abstract fun initData()
+    open fun initData() {
+        Log.d(HiyHelper.tag, "initData")
+        dispatchPageState(PageState.LOADING_OF_BOTTOM)
+    }
 
 }
