@@ -81,9 +81,20 @@ dependencies {
     kapt 'com.github.bumptech.glide:compiler:4.11.0'
     implementation 'com.drakeet.multitype:multitype:4.3.0'
 
-//    if (isCI()) {
-        implementation "com.hiy.mobile:core:1.0.0-SNAPSHOT"
-//    } else {
-//        implementation project(":sodacore")
-//    }
+    implementation "com.hiy.mobile:core:1.0.0-SNAPSHOT"
+
+}
+
+
+configurations.all {
+    println("1111 ==> ${properties}")
+    println("2222 ==> ${rootProject.properties}")
+    resolutionStrategy.dependencySubstitution.all { DependencySubstitution dependency ->
+        if (dependency.requested instanceof ModuleComponentSelector) {
+//            def targetProject = findProject(":${dependency.requested.module}")
+//            if (targetProject != null) {
+//                dependency.useTarget targetProject
+//            }
+        }
+    }
 }
