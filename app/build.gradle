@@ -58,6 +58,19 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    lintOptions {
+        abortOnError false
+        checkReleaseBuilds false
+    }
+}
+
+kapt {
+    javacOptions {
+        // Increase the max count of errors from annotation processors.
+        // Default is 100.
+        option("-debug", 1)
+    }
 }
 
 dependencies {
@@ -81,9 +94,17 @@ dependencies {
     implementation 'com.drakeet.multitype:multitype:4.3.0'
     // 解决livedata 数据倒灌
     implementation 'com.kunminx.arch:unpeek-livedata:7.8.0'
+    implementation "androidx.startup:startup-runtime:1.1.1"
 //    implementation "com.hiy.mobile:core:1.0.0-SNAPSHOT"
 //        implementation project(":sodacore")
+    kapt 'com.google.auto.service:auto-service:1.0-rc6'
+    implementation 'com.google.auto.service:auto-service:1.0.1'
+
+
 
     api project(":sodaui")
     api project(":sodacore")
+
+    api project(":anno")
+    kapt project(":processor")
 }

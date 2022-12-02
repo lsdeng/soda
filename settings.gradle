@@ -4,3 +4,5 @@ include ':app'
 include ':sodacore'
 include ':sodaui'
 
+include ':processor'
+include ':anno'

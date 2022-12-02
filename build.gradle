@@ -48,6 +48,10 @@ allprojects {
         maven {
             url 'https://maven.aliyun.com/repository/google/'
         }
+
+        maven {
+            url 'https://maven.aliyun.com/nexus/content/repositories/jcenter'
+        }
         maven {
             credentials {
                 username '632205d7287a2b849f0aa5e0'

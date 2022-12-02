@@ -13,7 +13,9 @@ import com.hiy.monbie.core.PageState
 import com.hiy.monbie.core.PageViewModel
 import com.hiy.soda.R
 import com.hiy.soda.bean.dto.RollGoods
+import com.hiy.soda.provider.IProvider
 import com.kunminx.architecture.domain.message.MutableResult
+import java.util.*
 
 class MainAc : BaseActivity<CountViewModel>() {
     override fun getViewModelClass(): Class<CountViewModel> {
@@ -48,6 +50,11 @@ class MainAc : BaseActivity<CountViewModel>() {
     override fun onViewCreated(decorView: View) {
         Log.d(HiyHelper.tag, "onViewCreated")
         viewModel.loadData()
+        val bookList = ServiceLoader.load(IProvider::class.java, javaClass.classLoader).toList()
+        bookList.forEach {
+            Log.d("MainActivity", it.name())
+        }
+
     }
 
 //
