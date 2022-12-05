@@ -1,6 +1,7 @@
 package com.hiy.soda
 
 import com.google.auto.service.AutoService
+import com.squareup.kotlinpoet.*
 import javax.annotation.processing.*
 import javax.lang.model.SourceVersion
 import javax.lang.model.element.TypeElement
@@ -19,41 +20,45 @@ class SodaProcessor : AbstractProcessor() {
 
     }
     override fun process(annotations: MutableSet<out TypeElement>?, roundEnv: RoundEnvironment?): Boolean {
-        processingEnv.messager.printMessage(Diagnostic.Kind.ERROR, "SodaProcessor process")
-//        val greeterClass = ClassName("", "Greeter")
-//        var mFiler = processingEnv.filer
-//        val file = FileSpec.builder("", "HelloWorld")
-//            .addType(
-//                TypeSpec.classBuilder("Greeter")
-//                    .primaryConstructor(
-//                        FunSpec.constructorBuilder()
-//                            .addParameter("name", String::class)
-//                            .build()
-//                    )
-//                    .addProperty(
-//                        PropertySpec.builder("name", String::class)
-//                            .initializer("name")
-//                            .build()
-//                    )
-//                    .addFunction(
-//                        FunSpec.builder("greet")
-//                            .addStatement("println(%P)", "Hello, \$name")
-//                            .build()
-//                    )
-//                    .build()
-//            )
-//            .addFunction(
-//                FunSpec.builder("main")
-//                    .addParameter("args", String::class, KModifier.VARARG)
-//                    .addStatement("%T(args[0]).greet()", greeterClass)
-//                    .build()
-//            )
-//            .build()
-//
-//
-//
+        processingEnv.messager.printMessage(Diagnostic.Kind.NOTE, "SodaProcessor process")
+        val greeterClass = ClassName("com.tustar.demo.data", "Greeter")
+        var mFiler = processingEnv.filer
+        val file = FileSpec.builder("com.tustar.demo.data", "HelloWorld")
+            .addType(
+                TypeSpec.classBuilder("Greeter")
+                    .primaryConstructor(
+                        FunSpec.constructorBuilder()
+                            .addParameter("name", String::class)
+                            .build()
+                    )
+                    .addProperty(
+                        PropertySpec.builder("name", String::class)
+                            .initializer("name")
+                            .build()
+                    )
+                    .addFunction(
+                        FunSpec.builder("greet")
+                            .addStatement("println(%P)", "Hello, \$name")
+                            .build()
+                    )
+                    .build()
+            )
+            .addFunction(
+                FunSpec.builder("main")
+                    .addParameter("args", String::class, KModifier.VARARG)
+                    .addStatement("%T(args[0]).greet()", greeterClass)
+                    .build()
+            )
+            .build()
+
+
 //        file.writeTo(System.out)
-//        file.writeTo(mFiler)
+        try {
+            file.writeTo(mFiler)
+            throw RuntimeException("查看堆栈")
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
 
         return true
     }

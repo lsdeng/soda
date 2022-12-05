@@ -16,3 +16,10 @@ class SodaPlugin : IPlugin {
         Log.d(HiyHelper.tag_plugin, "onCreate")
     }
 }
+
+@Plugin
+class HomePlugin : IPlugin {
+    override fun onCreate() {
+        Log.d(HiyHelper.tag_plugin, "onCreate")
+    }
+}
