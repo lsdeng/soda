@@ -1,8 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.hiy.monbie.ui">
 
     <application>
-        <activity android:name=".MainUiAc"/>
+        <activity
+            android:name=".MainUiAc"
+            android:exported="false"
+            tools:ignore="AppLinkUrlError">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="webview"
+                    android:scheme="wsc" />
+            </intent-filter>
+        </activity>
     </application>
 </manifest>

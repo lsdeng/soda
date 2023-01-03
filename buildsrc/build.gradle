@@ -1,13 +1,33 @@
 apply plugin: 'groovy'
 apply plugin: 'maven'
+apply plugin: 'kotlin'
 
 repositories {
+    maven {
+        url 'https://maven.aliyun.com/repository/public/'
+    }
+
+    maven {
+        url 'https://maven.aliyun.com/repository/google'
+    }
     mavenCentral()
     jcenter()
 }
 
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.10"
+    }
+}
+
+
 dependencies {
     implementation gradleApi()
     implementation localGroovy()
-//    implementation project(':hiyPlugin')
+    implementation project(':hiyPlugin')
 }
+

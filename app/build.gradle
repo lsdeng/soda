@@ -3,7 +3,8 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-parcelize'
     id 'kotlin-kapt'
-//    id 'hiyplugin'
+    id 'hiyplugin'
+    id 'king'
 }
 
 
@@ -18,20 +19,18 @@ ext.isCI = {
 }
 
 android {
-    compileSdkVersion 31
-    buildToolsVersion "29.0.3"
+    compileSdkVersion "${versions.compile}" as int
+    buildToolsVersion "${versions.buildToolsVersion}"
 
     defaultConfig {
         applicationId "com.hiy.soda"
         minSdkVersion 21
-        targetSdkVersion "${versions.compile}"
+        targetSdkVersion "${versions.compile}" as int
         versionCode 1
         versionName "1.0"
         ndk {
             abiFilters 'armeabi-v7a', 'arm64-v8a'
         }
-
-
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
