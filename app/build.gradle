@@ -5,6 +5,7 @@ plugins {
     id 'kotlin-kapt'
     id 'hiyplugin'
     id 'king'
+    id "io.realm.kotlin"
 }
 
 
@@ -103,8 +104,8 @@ dependencies {
 //        implementation project(":sodacore")
     kapt 'com.google.auto.service:auto-service:1.0-rc6'
     implementation 'com.google.auto.service:auto-service:1.0.1'
-
-
+    implementation "io.realm.kotlin:library-base:${versions.realm}"
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0-native-mt'
 
     api project(":sodaui")
     api project(":sodacore")

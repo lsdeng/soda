@@ -9,19 +9,6 @@
     tools:context=".ui.MainAc">
 
 
-    <com.hiy.soda.component.BaseLayout
-        android:id="@+id/touch_layout"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#F8CDA6">
-
-        <com.hiy.soda.component.BaseView
-            android:id="@+id/touch_view"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:background="#EC81DA" />
-    </com.hiy.soda.component.BaseLayout>
-
     <TextView
         android:id="@+id/tv"
         android:layout_width="match_parent"

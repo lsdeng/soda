@@ -63,12 +63,12 @@ class RollVm : ViewModel() {
 
             override fun onResponse(call: Call, response: Response) {
                 val ret = response.body?.string()
-                val goodsRet = Gson().fromJson<RollResDTO<RollGoods>>(ret, object : TypeToken<RollResDTO<RollGoods>>() {}.type)
-                if (goodsRet.code == 1) {
-                    Log.d("lsd", goodsRet.data?.goodsName ?: "")
-                } else {
-                    Log.d("lsd", goodsRet.msg ?: "")
-                }
+//                val goodsRet = Gson().fromJson<RollResDTO<RollGoods>>(ret, object : TypeToken<RollResDTO<RollGoods>>() {}.type)
+//                if (goodsRet.code == 1) {
+//                    Log.d("lsd", goodsRet.data?.goodsName ?: "")
+//                } else {
+//                    Log.d("lsd", goodsRet.msg ?: "")
+//                }
             }
 
         })

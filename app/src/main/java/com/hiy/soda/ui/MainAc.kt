@@ -13,11 +13,25 @@ import com.hiy.monbie.core.PageState
 import com.hiy.monbie.core.PageViewModel
 import com.hiy.soda.R
 import com.hiy.soda.bean.dto.RollGoods
+import com.hiy.soda.helper.SodaConstant
 import com.hiy.soda.provider.IProvider
 import com.kunminx.architecture.domain.message.MutableResult
+import io.realm.kotlin.Realm
+import io.realm.kotlin.RealmConfiguration
+import io.realm.kotlin.ext.query
+import io.realm.kotlin.internal.platform.RealmInitializer
 import java.util.*
 
 class MainAc : BaseActivity<CountViewModel>() {
+
+    private val realm: Realm by lazy {
+
+        val realmConfig = RealmConfiguration.Builder(schema = setOf(RollGoods::class))
+            .directory(this@MainAc.filesDir.absolutePath)
+            .build()
+        Realm.open(realmConfig)
+    }
+
     override fun getViewModelClass(): Class<CountViewModel> {
         return CountViewModel::class.java
     }
@@ -54,7 +68,23 @@ class MainAc : BaseActivity<CountViewModel>() {
         bookList.forEach {
             Log.d("MainActivity", it.name())
         }
+    }
 
+    override fun onResume() {
+        super.onResume()
+//        realm.writeBlocking {
+//            copyToRealm(
+//                RollGoods().apply {
+//                    this.brand = "a"
+//                    this.validPeriod = System.currentTimeMillis() + 24L * 60 * 60 * 1000
+//                }
+//            )
+//        }
+//
+//
+//        realm.query<RollGoods>("TRUEPREDICATE", null).find().apply {
+//            Log.d(SodaConstant.TAG, this.map { it.brand }.joinToString())
+//        }
     }
 
 //

@@ -1,14 +1,14 @@
 package com.hiy.soda.bean.dto
 
-import android.os.Parcelable
-import kotlinx.parcelize.Parcelize
+import io.realm.kotlin.types.ObjectId
+import io.realm.kotlin.types.RealmObject
+import io.realm.kotlin.types.annotations.PrimaryKey
+import kotlinx.parcelize.RawValue
 
-@Parcelize
-class RollGoods(
-    var barcode: String = "-1",
-    var goodsName: String? = null,
-    var price: String? = null,
-    var brand: String? = null,
-    var supplier: String? = null,
-    var standard: String? = null
-) : Parcelable
+class RollGoods() : RealmObject {
+    @PrimaryKey
+    var _id: @RawValue ObjectId = ObjectId.create()
+    var goodsName: String? = null
+    var brand: String? = null
+    var validPeriod: Long? = null
+}

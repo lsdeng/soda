@@ -54,8 +54,8 @@ class SodaProcessor : AbstractProcessor() {
 
 //        file.writeTo(System.out)
         try {
-            file.writeTo(mFiler)
-            throw RuntimeException("查看堆栈")
+//            file.writeTo(mFiler)
+//            throw RuntimeException("查看堆栈")
         } catch (e: Exception) {
             e.printStackTrace()
         }
