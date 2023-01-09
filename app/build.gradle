@@ -93,8 +93,12 @@ dependencies {
 
     implementation 'com.guolindev.permissionx:permissionx:1.6.4'
 
+    implementation 'com.google.android.flexbox:flexbox:3.0.0'
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
+    implementation 'androidx.paging:paging-common-ktx:2.1.2'
+    implementation 'androidx.fragment:fragment-ktx:1.5.5'
 
-    implementation 'com.github.bumptech.glide:glide:4.11.0'
+
     kapt 'com.github.bumptech.glide:compiler:4.11.0'
     implementation 'com.drakeet.multitype:multitype:4.3.0'
     // 解决livedata 数据倒灌
@@ -106,6 +110,16 @@ dependencies {
     implementation 'com.google.auto.service:auto-service:1.0.1'
     implementation "io.realm.kotlin:library-base:${versions.realm}"
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0-native-mt'
+
+    implementation "androidx.paging:paging-runtime:${versions.paging}"
+
+
+    def room_version = "2.4.3"
+
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
+    // To use Kotlin annotation processing tool (kapt)
+    kapt "androidx.room:room-compiler:$room_version"
 
     api project(":sodaui")
     api project(":sodacore")

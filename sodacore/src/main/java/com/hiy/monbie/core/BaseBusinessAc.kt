@@ -14,9 +14,10 @@ import androidx.lifecycle.ViewModelProvider
  * created on :  2022/11/24 3:11 下午
  * desc:
  */
-abstract class BaseActivity<T : PageViewModel> : AppCompatActivity() {
+abstract class BaseBusinessAc<T : PageViewModel> : AppCompatActivity() {
 
     protected lateinit var viewModel: T
+
     abstract fun getViewModelClass(): Class<T>
 
     abstract fun getContentLayoutId(): Int

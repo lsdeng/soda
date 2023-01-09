@@ -24,11 +24,6 @@
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data
-                    android:host="webview"
-                    android:scheme="wsc" />
             </intent-filter>
         </activity>
         <activity
@@ -42,12 +37,14 @@
         </activity>
         <activity
             android:name="com.king.zxing.CaptureActivity"
-            android:exported="true"/>
+            android:exported="true" />
+        <activity
+            android:name=".ui.PagingAc"
+            android:exported="false" />
+
         <provider
             android:name="androidx.startup.InitializationProvider"
-            android:authorities="${applicationId}.androidx-startup"
-            >
-        </provider>
+            android:authorities="${applicationId}.androidx-startup"></provider>
     </application>
 
 </manifest>
