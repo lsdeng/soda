@@ -18,19 +18,9 @@ import com.hiy.soda.bean.dto.RollGoods
 import com.hiy.soda.provider.IProvider
 import com.hiy.soda.ui.fg.LifeCycleFg
 import com.kunminx.architecture.domain.message.MutableResult
-import io.realm.kotlin.Realm
-import io.realm.kotlin.RealmConfiguration
 import java.util.*
 
 class MainAc : BaseBusinessAc<CountViewModel>() {
-
-    private val realm: Realm by lazy {
-
-        val realmConfig = RealmConfiguration.Builder(schema = setOf(RollGoods::class))
-            .directory(this@MainAc.filesDir.absolutePath)
-            .build()
-        Realm.open(realmConfig)
-    }
 
     override fun getViewModelClass(): Class<CountViewModel> {
         return CountViewModel::class.java
@@ -45,6 +35,7 @@ class MainAc : BaseBusinessAc<CountViewModel>() {
     }
 
     override fun initViewModel() {
+
     }
 
     override fun initObserve() {
@@ -90,20 +81,9 @@ class MainAc : BaseBusinessAc<CountViewModel>() {
 
     override fun onResume() {
         super.onResume()
-//        realm.writeBlocking {
-//            copyToRealm(
-//                RollGoods().apply {
-//                    this.brand = "a"
-//                    this.validPeriod = System.currentTimeMillis() + 24L * 60 * 60 * 1000
-//                }
-//            )
-//        }
-//
-//
-//        realm.query<RollGoods>("TRUEPREDICATE", null).find().apply {
-//            Log.d(SodaConstant.TAG, this.map { it.brand }.joinToString())
-//        }
     }
+
+
 }
 
 class CountViewModel : PageViewModel() {
@@ -124,19 +104,5 @@ class CountViewModel : PageViewModel() {
             count.postValue(1000)
             dispatchPageState(PageState.Content)
         }.start()
-    }
-}
-
-class GoodsViewHolder(var view: View) : RecyclerView.ViewHolder(view) {
-    companion object {
-        fun getLayoutId(): Int {
-            return R.layout.list_ite_goods
-        }
-    }
-
-
-    fun fillData(goods: RollGoods) {
-        val nameTv = itemView.findViewById<TextView>(R.id.name_tv)
-        nameTv.text = goods.goodsName
     }
 }

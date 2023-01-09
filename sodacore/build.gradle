@@ -41,6 +41,7 @@ dependencies {
     implementation "androidx.core:core-ktx:${versions.core_ktx}"
     implementation "androidx.appcompat:appcompat:${versions.appcompat}"
     implementation "com.google.android.material:material:${versions.appcompat}"
+    implementation "androidx.activity:activity-ktx:1.6.1"
 
     // 解决livedata 数据倒灌
     implementation 'com.kunminx.arch:unpeek-livedata:7.8.0'
