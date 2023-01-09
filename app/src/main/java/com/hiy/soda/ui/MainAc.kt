@@ -5,22 +5,31 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.TextView
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.RecyclerView
+import androidx.lifecycle.lifecycleScope
+import androidx.room.Room
 import com.hiy.monbie.core.BaseBusinessAc
 import com.hiy.monbie.core.HiyHelper
 import com.hiy.monbie.core.PageState
 import com.hiy.monbie.core.PageViewModel
 import com.hiy.soda.R
-import com.hiy.soda.bean.dto.RollGoods
+import com.hiy.soda.bean.dto.User
+import com.hiy.soda.database.AppDatabase
+import com.hiy.soda.helper.startup.GsonHelper
 import com.hiy.soda.provider.IProvider
 import com.hiy.soda.ui.fg.LifeCycleFg
 import com.kunminx.architecture.domain.message.MutableResult
+import kotlinx.coroutines.*
 import java.util.*
 
 class MainAc : BaseBusinessAc<CountViewModel>() {
+    val database by lazy {
+        Room.databaseBuilder(
+            applicationContext,
+            AppDatabase::class.java, "database-name"
+        ).build()
+    }
 
     override fun getViewModelClass(): Class<CountViewModel> {
         return CountViewModel::class.java
@@ -35,7 +44,11 @@ class MainAc : BaseBusinessAc<CountViewModel>() {
     }
 
     override fun initViewModel() {
-
+        lifecycleScope.launch() {
+            withContext(Dispatchers.IO) {
+                database.userDao().insertAll(User(name = "lsd"))
+            }
+        }
     }
 
     override fun initObserve() {
@@ -55,6 +68,7 @@ class MainAc : BaseBusinessAc<CountViewModel>() {
             }
         }
     }
+
 
     override fun onViewCreated(decorView: View) {
         Log.d(HiyHelper.tag, "onViewCreated")
@@ -81,13 +95,18 @@ class MainAc : BaseBusinessAc<CountViewModel>() {
 
     override fun onResume() {
         super.onResume()
+        lifecycleScope.launch {
+            withContext(Dispatchers.IO) {
+                database.userDao().getAll().onEach { GsonHelper.get().toJson(it) }
+            }
+        }
     }
-
-
 }
+
 
 class CountViewModel : PageViewModel() {
     val count: MutableResult<Int> = MutableResult<Int>(0)
+
 
     fun observeCountState(lifecycleOwner: LifecycleOwner, observer: Observer<Int>) {
         count.observe(lifecycleOwner, observer)

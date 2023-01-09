@@ -38,7 +38,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:${versions.kotlin_version}"
     implementation "androidx.core:core-ktx:${versions.core_ktx}"
     implementation "androidx.appcompat:appcompat:${versions.appcompat}"
-    implementation "com.google.android.material:material:${versions.appcompat}"
+    implementation "com.google.android.material:material:${versions.material}"
 
 }
 
