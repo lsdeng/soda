@@ -38,10 +38,6 @@ class PagingAc : BaseBusinessAc<PagingViewModel>() {
     })
 
 
-    override fun getViewModelClass(): Class<PagingViewModel> {
-        return PagingViewModel::class.java
-    }
-
     override fun getContentLayoutId(): Int {
         return R.layout.activity_rv
     }

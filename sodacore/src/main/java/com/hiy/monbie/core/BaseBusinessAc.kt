@@ -7,7 +7,10 @@ import android.view.View
 import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import java.lang.RuntimeException
+import java.lang.reflect.ParameterizedType
 
 /**
  * auther: liusaideng
@@ -18,19 +21,14 @@ abstract class BaseBusinessAc<T : PageViewModel> : AppCompatActivity() {
 
     protected lateinit var viewModel: T
 
-    abstract fun getViewModelClass(): Class<T>
-
     abstract fun getContentLayoutId(): Int
-
-    open fun initViewModel() {
-
-    }
 
     abstract fun initObserve()
 
     abstract fun initListener()
 
     abstract fun onViewCreated(decorView: View)
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,8 +40,8 @@ abstract class BaseBusinessAc<T : PageViewModel> : AppCompatActivity() {
             contentContainer.addView(contentView)
         }
 
-        viewModel = ViewModelProvider.NewInstanceFactory().create(getViewModelClass())
-        initViewModel()
+        val modelClass = (((javaClass.genericSuperclass as? ParameterizedType)?.actualTypeArguments?.get(0)) as? Class<T>) ?: throw RuntimeException("T is error")
+        viewModel = ViewModelProvider.NewInstanceFactory().create(modelClass)
 
         viewModel.observePageState(this, Observer<PageState> {
             Log.d(HiyHelper.tag, it.desc)

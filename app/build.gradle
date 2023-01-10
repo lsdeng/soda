@@ -108,7 +108,7 @@ dependencies {
     kapt "androidx.room:room-compiler:$room_version"
     // optional - Paging 3 Integration
     implementation "androidx.room:room-paging:$room_version"
-
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     api project(":sodaui")
     api project(":sodacore")
 
