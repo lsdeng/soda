@@ -26,8 +26,9 @@ class MainVm  : PageViewModel() {
         count.observe(lifecycleOwner, observer)
     }
 
-    override fun initData() {
-        super.initData()
+
+    override fun onActivityCreated() {
+        super.onActivityCreated()
         viewModelScope.launch() {
             withContext(Dispatchers.IO) {
                 DBHelper.database.userDao().insertAll(User(name = "lsd"))
@@ -38,12 +39,16 @@ class MainVm  : PageViewModel() {
         }
     }
 
+    override fun getExternalStates(): Map<String, MutableResult<*>> {
+        return mapOf()
+    }
+
 
     fun loadData() {
         Thread {
             Thread.sleep(1000)
             count.postValue(1000)
-            dispatchPageState(PageState.Content)
+            dispatchPageState<PageState>(KEY_PAGE_STATE, PageState.Content)
         }.start()
     }
 }

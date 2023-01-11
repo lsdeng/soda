@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hiy.monbie.core.BaseBusinessAc
 import com.hiy.monbie.core.PageViewModel
 import com.hiy.soda.R
+import com.hiy.soda.helper.ItemClickSupport
 import com.hiy.soda.helper.SodaConstant
 import com.hiy.soda.helper.startup.GsonHelper
 import com.hiy.soda.ui.adapter.BaseViewHolder
@@ -23,7 +24,6 @@ import com.kunminx.architecture.domain.message.MutableResult
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.launch
 import kotlin.random.Random
 
 /**
@@ -43,6 +43,7 @@ class PagingAc : BaseBusinessAc<PagingViewModel>() {
     }
 
     override fun initObserve() {
+
     }
 
     override fun initListener() {
@@ -95,6 +96,10 @@ class PagingViewModel : PageViewModel() {
 
     fun getDataSource(): List<Int> {
         return list.value ?: listOf()
+    }
+
+    override fun getExternalStates(): Map<String, MutableResult<*>> {
+        return mapOf()
     }
 }
 

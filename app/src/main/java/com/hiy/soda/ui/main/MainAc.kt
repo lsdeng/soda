@@ -4,10 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.drakeet.multitype.MultiTypeAdapter
@@ -17,8 +15,6 @@ import com.hiy.monbie.core.PageState
 import com.hiy.monbie.core.PageViewModel
 import com.hiy.soda.R
 import com.hiy.soda.bean.bo.GridBo
-import com.hiy.soda.bean.dto.Goods
-import com.hiy.soda.bean.dto.User
 import com.hiy.soda.database.DBHelper
 import com.hiy.soda.helper.ItemClickSupport
 import com.hiy.soda.helper.SodaConstant
@@ -26,7 +22,6 @@ import com.hiy.soda.helper.logger
 import com.hiy.soda.helper.startup.GsonHelper
 import com.hiy.soda.ui.adapter.GridItemViewBinder
 import com.hiy.soda.ui.main.MainVm
-import com.kunminx.architecture.domain.message.MutableResult
 import kotlinx.coroutines.*
 import java.util.*
 
@@ -43,7 +38,7 @@ class MainAc : BaseBusinessAc<MainVm>() {
     }
 
     override fun initObserve() {
-        viewModel.observePageState(this, Observer {
+        viewModel.observePageState<PageState>(PageViewModel.KEY_PAGE_STATE, this, Observer {
             Log.d(HiyHelper.tag, "mainac-pageState${it.desc}")
         })
 
@@ -87,6 +82,11 @@ class MainAc : BaseBusinessAc<MainVm>() {
 
 
         viewModel.loadData()
+
+        viewModel.dispatchPageState<PageState>(PageViewModel.KEY_PAGE_STATE, PageState.LOADING_OF_BOTTOM)
+        mRv.postDelayed({
+            viewModel.dispatchPageState<PageState>(PageViewModel.KEY_PAGE_STATE, PageState.Content)
+        }, 3000)
     }
 
     override fun onResume() {

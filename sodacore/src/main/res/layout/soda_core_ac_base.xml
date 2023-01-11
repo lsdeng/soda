@@ -14,11 +14,44 @@
         android:minHeight="48dp" />
 
     <FrameLayout
-        android:id="@+id/content_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#C4FFE3" />
+        android:layout_height="match_parent">
 
+        <FrameLayout
+            android:visibility="gone"
+            android:id="@+id/loading_bottom_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="底部loading" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:visibility="gone"
+            android:id="@+id/error_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="错误error" />
+        </FrameLayout>
+
+
+        <FrameLayout
+            android:visibility="gone"
+            android:id="@+id/content_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#C4FFE3" />
+
+    </FrameLayout>
 
 
 </LinearLayout>
