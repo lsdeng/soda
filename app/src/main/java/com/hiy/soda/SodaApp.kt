@@ -23,6 +23,12 @@ class SodaApp : Application() {
 
         AppInitializer.getInstance(applicationContext).initializeComponent(WorkManagerInitializer::class.java)
         AppInitializer.getInstance(applicationContext).initializeComponent(WorkManagerInitializer1::class.java)
+
+        Thread.setDefaultUncaughtExceptionHandler(object : Thread.UncaughtExceptionHandler {
+            override fun uncaughtException(t: Thread, e: Throwable) {
+            }
+
+        })
     }
 
     override fun attachBaseContext(base: Context?) {
