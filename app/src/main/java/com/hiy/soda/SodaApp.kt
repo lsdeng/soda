@@ -20,7 +20,7 @@ class SodaApp : Application() {
         super.onCreate()
         application = this@SodaApp
 
-
+        AppInitializer.getInstance(applicationContext)
         AppInitializer.getInstance(applicationContext).initializeComponent(WorkManagerInitializer::class.java)
         AppInitializer.getInstance(applicationContext).initializeComponent(WorkManagerInitializer1::class.java)
 

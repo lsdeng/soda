@@ -12,21 +12,36 @@ import com.kunminx.architecture.domain.message.MutableResult
  */
 open abstract class PageViewModel : BaseViewModel() {
 
+    companion object {
+        const val KEY_PAGE_STATE = "pageState"
+    }
+
+    private val mutableResults = mutableMapOf<String, MutableResult<*>>()
+
     private val pageState: MutableResult<PageState> = MutableResult.Builder<PageState>()
         .setAllowNullValue(false)
         .create()
 
-    fun observePageState(lifecycleOwner: LifecycleOwner, observer: Observer<PageState>) {
-        pageState.observe(lifecycleOwner, observer)
+    fun <T> observePageState(key: String, lifecycleOwner: LifecycleOwner, observer: Observer<T>) {
+        (mutableResults[key] as? MutableResult<T>)?.observe(lifecycleOwner, observer)
     }
 
-    fun dispatchPageState(value: PageState) {
-        pageState.postValue(value)
+    fun <T> dispatchPageState(key: String, value: T) {
+        (mutableResults[key] as? MutableResult<T> )?.postValue(value)
     }
 
-    open fun initData() {
+    open fun onActivityCreated() {
         Log.d(HiyHelper.tag, "initData")
-        dispatchPageState(PageState.LOADING_OF_BOTTOM)
+        mutableResults.putAll(getRegisterStates() + getExternalStates())
     }
+
+     fun getRegisterStates() : Map<String, MutableResult<*>> {
+         return mapOf<String, MutableResult<*>>(
+             KEY_PAGE_STATE to pageState
+         )
+     }
+
+
+    abstract fun getExternalStates() : Map<String, MutableResult<*>>
 
 }

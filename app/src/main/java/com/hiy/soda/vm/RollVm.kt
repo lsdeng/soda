@@ -5,9 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.hiy.soda.bean.common.RollResDTO
 import com.hiy.soda.bean.common.RollResListDTO
-import com.hiy.soda.bean.dto.RollGoods
+import com.hiy.soda.bean.dto.Goods
 import com.hiy.soda.bean.dto.RollImg
 import com.hiy.soda.helper.SodaConstant
 import okhttp3.*
@@ -33,7 +32,7 @@ class RollVm : ViewModel() {
 
     lateinit var appSecret: String
 
-    val goods = MutableLiveData<List<RollGoods>>(listOf())
+    val goods = MutableLiveData<List<Goods>>(listOf())
 
     val girls = MutableLiveData<List<RollImg>>(listOf())
 
@@ -63,12 +62,12 @@ class RollVm : ViewModel() {
 
             override fun onResponse(call: Call, response: Response) {
                 val ret = response.body?.string()
-                val goodsRet = Gson().fromJson<RollResDTO<RollGoods>>(ret, object : TypeToken<RollResDTO<RollGoods>>() {}.type)
-                if (goodsRet.code == 1) {
-                    Log.d("lsd", goodsRet.data?.goodsName ?: "")
-                } else {
-                    Log.d("lsd", goodsRet.msg ?: "")
-                }
+//                val goodsRet = Gson().fromJson<RollResDTO<RollGoods>>(ret, object : TypeToken<RollResDTO<RollGoods>>() {}.type)
+//                if (goodsRet.code == 1) {
+//                    Log.d("lsd", goodsRet.data?.goodsName ?: "")
+//                } else {
+//                    Log.d("lsd", goodsRet.msg ?: "")
+//                }
             }
 
         })

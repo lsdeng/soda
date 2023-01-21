@@ -18,7 +18,14 @@
         tools:targetApi="n">
         <activity
             android:name=".ui.RvAc"
-            android:exported="false" />
+            android:exported="true"
+         >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".ui.MainAc"
             android:exported="true">
@@ -30,13 +37,14 @@
         </activity>
         <activity
             android:name="com.king.zxing.CaptureActivity"
-            android:exported="true"/>
+            android:exported="true" />
+        <activity
+            android:name=".ui.PagingAc"
+            android:exported="false" />
+
         <provider
             android:name="androidx.startup.InitializationProvider"
-            android:authorities="${applicationId}.androidx-startup"
-            tools:node="remove"
-            >
-        </provider>
+            android:authorities="${applicationId}.androidx-startup"></provider>
     </application>
 
 </manifest>

@@ -3,35 +3,24 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-parcelize'
     id 'kotlin-kapt'
-//    id 'hiyplugin'
+    id 'hiyplugin'
+    id 'king'
 }
 
-
-
-ext.isCI = {
-    def key = "CI"
-    if (project.hasProperty(key)) {
-        println("${project.getProperties().get(key)}")
-        return project.getProperties().get(key).asBoolean()
-    }
-    return false
-}
 
 android {
-    compileSdkVersion 31
-    buildToolsVersion "29.0.3"
+    compileSdkVersion "${versions.compile}" as int
+    buildToolsVersion "${versions.buildToolsVersion}"
 
     defaultConfig {
         applicationId "com.hiy.soda"
         minSdkVersion 21
-        targetSdkVersion "${versions.compile}"
+        targetSdkVersion "${versions.compile}" as int
         versionCode 1
         versionName "1.0"
         ndk {
             abiFilters 'armeabi-v7a', 'arm64-v8a'
         }
-
-
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -49,11 +38,11 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            manifestPlaceholders = [app_label:"Soda"]
+            manifestPlaceholders = [app_label:"苏打"]
         }
         debug {
             applicationIdSuffix ".debug"
-            manifestPlaceholders = [app_label:"Soda-Debug "]
+            manifestPlaceholders = [app_label:"苏打-Debug "]
         }
     }
     compileOptions {
@@ -82,20 +71,22 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:${versions.kotlin_version}"
     implementation "androidx.core:core-ktx:${versions.core_ktx}"
     implementation "androidx.appcompat:appcompat:${versions.appcompat}"
-    implementation "com.google.android.material:material:${versions.appcompat}"
+    implementation "com.google.android.material:material:${versions.material}"
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
 
     implementation("com.squareup.okhttp3:okhttp:4.10.0")
     implementation("com.google.code.gson:gson:2.9.1")
 
-
-    implementation 'com.github.jenly1314:zxing-lite:2.1.1'
-
     implementation 'com.guolindev.permissionx:permissionx:1.6.4'
 
+    implementation 'com.google.android.flexbox:flexbox:3.0.0'
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
+    implementation 'androidx.paging:paging-common-ktx:2.1.2'
+    implementation 'androidx.fragment:fragment-ktx:1.5.5'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1'
 
-    implementation 'com.github.bumptech.glide:glide:4.11.0'
     kapt 'com.github.bumptech.glide:compiler:4.11.0'
+
     implementation 'com.drakeet.multitype:multitype:4.3.0'
     // 解决livedata 数据倒灌
     implementation 'com.kunminx.arch:unpeek-livedata:7.8.0'
@@ -104,9 +95,20 @@ dependencies {
 //        implementation project(":sodacore")
     kapt 'com.google.auto.service:auto-service:1.0-rc6'
     implementation 'com.google.auto.service:auto-service:1.0.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0-native-mt'
 
+    implementation "androidx.paging:paging-runtime:${versions.paging}"
+    implementation "androidx.activity:activity-ktx:1.2.2"
 
+    def room_version = "2.4.3"
 
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
+    // To use Kotlin annotation processing tool (kapt)
+    kapt "androidx.room:room-compiler:$room_version"
+    // optional - Paging 3 Integration
+    implementation "androidx.room:room-paging:$room_version"
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     api project(":sodaui")
     api project(":sodacore")
 
