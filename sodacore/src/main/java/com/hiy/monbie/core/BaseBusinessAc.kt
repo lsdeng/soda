@@ -84,7 +84,13 @@ abstract class BaseBusinessAc<T : PageViewModel> : AppCompatActivity() {
                 }
             }
         })
+
+        dispatchPageState(initPageState())
     }
 
+    open fun initPageState() = PageState.LOADING_OF_BOTTOM
 
+    fun dispatchPageState(pageState: PageState) {
+        viewModel.dispatchPageState(PageViewModel.KEY_PAGE_STATE, pageState)
+    }
 }

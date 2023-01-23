@@ -3,7 +3,6 @@ package com.hiy.soda.ui.main
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.viewModelScope
-import com.hiy.monbie.core.PageState
 import com.hiy.monbie.core.PageViewModel
 import com.hiy.soda.bean.dto.Goods
 import com.hiy.soda.bean.dto.User
@@ -46,9 +45,9 @@ class MainVm  : PageViewModel() {
 
     fun loadData() {
         Thread {
-            Thread.sleep(1000)
-            count.postValue(1000)
-            dispatchPageState<PageState>(KEY_PAGE_STATE, PageState.Content)
+//            Thread.sleep(1000)
+//            count.postValue(1000)
+//            dispatchPageState<PageState>(KEY_PAGE_STATE, PageState.Content)
         }.start()
     }
 }

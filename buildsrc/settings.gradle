@@ -1,7 +1,17 @@
 rootProject.name = 'hiyPlugin'
 
-include ':hiyPlugin'
-project(":hiyPlugin").projectDir = new File('/Users/liusaideng/hiy/sodaplugin-master/plugin')
+def pluginDirs = ['/Users/liusaideng/hiy/sodaplugin-master/plugin', '/Users/saidengliu/hiy/pluginP/hiyPlugin/plugin']
+pluginDirs.forEach { path ->
+    if (new File(path).exists()) {
+        println("plugin: ${[path]}目录 => 存在")
+        include ':hiyPlugin'
+        project(":hiyPlugin").projectDir = new File('/Users/saidengliu/hiy/pluginP/hiyPlugin/plugin')
+    } else {
+        println("plugin: ${[path]}目录 =>  不存在")
+    }
+}
+//include ':hiyPlugin'
+//project(":hiyPlugin").projectDir = new File('')
 
 
 

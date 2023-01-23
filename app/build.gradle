@@ -4,7 +4,7 @@ plugins {
     id 'kotlin-parcelize'
     id 'kotlin-kapt'
     id 'hiyplugin'
-    id 'king'
+//    id 'king'
 }
 
 

@@ -27,7 +27,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.MainAc"
+            android:name=".ui.main.MainAc"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,9 +35,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="com.king.zxing.CaptureActivity"
-            android:exported="true" />
         <activity
             android:name=".ui.PagingAc"
             android:exported="false" />

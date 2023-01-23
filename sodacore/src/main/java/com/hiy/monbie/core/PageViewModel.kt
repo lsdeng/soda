@@ -35,7 +35,7 @@ open abstract class PageViewModel : BaseViewModel() {
         mutableResults.putAll(getRegisterStates() + getExternalStates())
     }
 
-     fun getRegisterStates() : Map<String, MutableResult<*>> {
+     private fun getRegisterStates() : Map<String, MutableResult<*>> {
          return mapOf<String, MutableResult<*>>(
              KEY_PAGE_STATE to pageState
          )

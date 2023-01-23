@@ -1,4 +1,4 @@
-package com.hiy.soda.ui
+package com.hiy.soda.ui.main
 
 import android.content.Intent
 import android.os.Bundle
@@ -20,10 +20,11 @@ import com.hiy.soda.helper.ItemClickSupport
 import com.hiy.soda.helper.SodaConstant
 import com.hiy.soda.helper.logger
 import com.hiy.soda.helper.startup.GsonHelper
+import com.hiy.soda.ui.PagingAc
 import com.hiy.soda.ui.adapter.GridItemViewBinder
-import com.hiy.soda.ui.main.MainVm
-import kotlinx.coroutines.*
-import java.util.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MainAc : BaseBusinessAc<MainVm>() {
     private lateinit var mRv: RecyclerView
@@ -55,7 +56,6 @@ class MainAc : BaseBusinessAc<MainVm>() {
         }
     }
 
-
     override fun onViewCreated(decorView: View) {
         mRv = decorView.findViewById<RecyclerView>(R.id.rv)
         mRv.layoutManager = GridLayoutManager(decorView.context, 4).apply {
@@ -83,10 +83,10 @@ class MainAc : BaseBusinessAc<MainVm>() {
 
         viewModel.loadData()
 
-        viewModel.dispatchPageState<PageState>(PageViewModel.KEY_PAGE_STATE, PageState.LOADING_OF_BOTTOM)
-        mRv.postDelayed({
-            viewModel.dispatchPageState<PageState>(PageViewModel.KEY_PAGE_STATE, PageState.Content)
-        }, 3000)
+//        viewModel.dispatchPageState<PageState>(PageViewModel.KEY_PAGE_STATE, PageState.LOADING_OF_BOTTOM)
+//        mRv.postDelayed({
+//            viewModel.dispatchPageState<PageState>(PageViewModel.KEY_PAGE_STATE, PageState.Content)
+//        }, 3000)
     }
 
     override fun onResume() {
