@@ -20,6 +20,8 @@ import com.hiy.soda.helper.ItemClickSupport
 import com.hiy.soda.helper.SodaConstant
 import com.hiy.soda.helper.logger
 import com.hiy.soda.helper.startup.GsonHelper
+import com.hiy.soda.ui.AddGoodsAc
+import com.hiy.soda.ui.GoodsListAc
 import com.hiy.soda.ui.PagingAc
 import com.hiy.soda.ui.adapter.GridItemViewBinder
 import kotlinx.coroutines.Dispatchers
@@ -27,8 +29,10 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class MainAc : BaseBusinessAc<MainVm>() {
+
     private lateinit var mRv: RecyclerView
     private val mData = mutableListOf<Any>()
+
 
     override fun getContentLayoutId(): Int {
         return R.layout.ac_main
@@ -53,6 +57,10 @@ class MainAc : BaseBusinessAc<MainVm>() {
             Intent(this@MainAc, PagingAc::class.java).apply {
                 this@MainAc.startActivity(this)
             }
+        }
+
+        findViewById<View>(R.id.goods_list).setOnClickListener {
+            GoodsListAc.navGoodsList(this@MainAc)
         }
     }
 
@@ -83,10 +91,14 @@ class MainAc : BaseBusinessAc<MainVm>() {
 
         viewModel.loadData()
 
-//        viewModel.dispatchPageState<PageState>(PageViewModel.KEY_PAGE_STATE, PageState.LOADING_OF_BOTTOM)
-//        mRv.postDelayed({
-//            viewModel.dispatchPageState<PageState>(PageViewModel.KEY_PAGE_STATE, PageState.Content)
-//        }, 3000)
+
+        findViewById<View>(R.id.add_goods).setOnClickListener {
+            AddGoodsAc.navAddGoods(this@MainAc)
+        }
+
+        mRv.postDelayed({
+            viewModel.dispatchPageState<PageState>(PageViewModel.KEY_PAGE_STATE, PageState.Content)
+        }, 1000)
     }
 
     override fun onResume() {
@@ -101,5 +113,9 @@ class MainAc : BaseBusinessAc<MainVm>() {
                 }
             }
         }
+    }
+
+    override fun initToolbar(view: View) {
+
     }
 }

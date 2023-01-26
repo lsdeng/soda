@@ -5,6 +5,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
         android:name=".SodaApp"
@@ -17,9 +18,23 @@
         android:theme="@style/Theme.Soda"
         tools:targetApi="n">
         <activity
+            android:name=".ui.SplashAc"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.AddGoodsAc"
+            android:exported="false" />
+        <activity
+            android:name=".ui.GoodsListAc"
+            android:exported="false" />
+        <activity
             android:name=".ui.RvAc"
-            android:exported="true"
-         >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -29,11 +44,7 @@
         <activity
             android:name=".ui.main.MainAc"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".ui.PagingAc"
@@ -41,7 +52,7 @@
 
         <provider
             android:name="androidx.startup.InitializationProvider"
-            android:authorities="${applicationId}.androidx-startup"></provider>
+            android:authorities="${applicationId}.androidx-startup" />
     </application>
 
 </manifest>

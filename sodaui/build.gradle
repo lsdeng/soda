@@ -43,25 +43,25 @@ dependencies {
 }
 
 
-apply plugin: 'maven'
-uploadArchives {
-    repositories {
-        mavenDeployer {
-            repository(url: 'https://packages.aliyun.com/maven/repository/2278042-release-HbC1CR/') {
-                authentication(
-                        userName: '632205d7287a2b849f0aa5e0',
-                        password: 'P6i2XfJAojyX'
-                )
-            }
-            snapshotRepository(url: 'https://packages.aliyun.com/maven/repository/2278042-snapshot-eMpKJL/') {
-                authentication(
-                        userName: '632205d7287a2b849f0aa5e0',
-                        password: 'P6i2XfJAojyX'
-                )
-            }
-            pom.version = '1.0.0-SNAPSHOT'
-            pom.artifactId = "ui"
-            pom.groupId = 'com.hiy.mobile'
-        }
-    }
-}
+//apply plugin: 'maven'
+//uploadArchives {
+//    repositories {
+//        mavenDeployer {
+//            repository(url: 'https://packages.aliyun.com/maven/repository/2278042-release-HbC1CR/') {
+//                authentication(
+//                        userName: '632205d7287a2b849f0aa5e0',
+//                        password: 'P6i2XfJAojyX'
+//                )
+//            }
+//            snapshotRepository(url: 'https://packages.aliyun.com/maven/repository/2278042-snapshot-eMpKJL/') {
+//                authentication(
+//                        userName: '632205d7287a2b849f0aa5e0',
+//                        password: 'P6i2XfJAojyX'
+//                )
+//            }
+//            pom.version = '1.0.0-SNAPSHOT'
+//            pom.artifactId = "ui"
+//            pom.groupId = 'com.hiy.mobile'
+//        }
+//    }
+//}

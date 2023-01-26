@@ -14,5 +14,10 @@ class Goods(
     var brand: String? = null,
     @ColumnInfo(name = "valid_period")
     var validPeriod: Date? = null,
-    val path: String? = null,
+    var path: String? = null,
 )
+
+
+fun Goods.isValid() : Boolean {
+    return name?.isNotBlank() == true &&  validPeriod != null && path?.isNotBlank() == true
+}

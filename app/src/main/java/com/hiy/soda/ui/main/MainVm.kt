@@ -43,11 +43,7 @@ class MainVm  : PageViewModel() {
     }
 
 
-    fun loadData() {
-        Thread {
-//            Thread.sleep(1000)
-//            count.postValue(1000)
-//            dispatchPageState<PageState>(KEY_PAGE_STATE, PageState.Content)
-        }.start()
+    override fun loadData() {
     }
+
 }

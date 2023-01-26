@@ -1,6 +1,10 @@
 package com.hiy.monbie.core
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * auther: liusaideng
@@ -8,4 +12,15 @@ import androidx.lifecycle.ViewModel
  * desc:
  */
 open abstract class BaseViewModel : ViewModel() {
+
+
+    fun <T> beginCoroutinesIO(params: T, callback: (T) -> Unit) {
+        viewModelScope.launch() {
+            withContext(Dispatchers.IO) {
+                callback.invoke(params)
+            }
+        }
+    }
+
+    abstract fun loadData()
 }

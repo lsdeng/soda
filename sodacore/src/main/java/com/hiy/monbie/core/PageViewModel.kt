@@ -35,12 +35,13 @@ open abstract class PageViewModel : BaseViewModel() {
         mutableResults.putAll(getRegisterStates() + getExternalStates())
     }
 
+
+
      private fun getRegisterStates() : Map<String, MutableResult<*>> {
          return mapOf<String, MutableResult<*>>(
              KEY_PAGE_STATE to pageState
          )
      }
-
 
     abstract fun getExternalStates() : Map<String, MutableResult<*>>
 

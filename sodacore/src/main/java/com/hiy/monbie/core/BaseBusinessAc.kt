@@ -4,10 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.FrameLayout
+import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.hiy.soda.helper.visible
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.lang.reflect.ParameterizedType
 
 /**
@@ -24,11 +29,19 @@ abstract class BaseBusinessAc<T : PageViewModel> : AppCompatActivity() {
 
     abstract fun getContentLayoutId(): Int
 
-    abstract fun initObserve()
+    open fun getToolbarLayoutId(): Int {
+        return R.layout.layout_toolbar
+    }
+
+    abstract fun onViewCreated(decorView: View)
+
+    open fun initToolbar(view: View) {
+
+    }
 
     abstract fun initListener()
 
-    abstract fun onViewCreated(decorView: View)
+    abstract fun initObserve()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +52,11 @@ abstract class BaseBusinessAc<T : PageViewModel> : AppCompatActivity() {
         if (getContentLayoutId() != 0) {
             val contentView = LayoutInflater.from(this).inflate(getContentLayoutId(), contentContainer, false)
             contentContainer.addView(contentView)
+        }
+
+        findViewById<RelativeLayout>(R.id.toolbar_container).apply {
+            View.inflate(this@BaseBusinessAc, getToolbarLayoutId(), this)
+            initToolbar(this)
         }
 
         val modelClass =
@@ -54,6 +72,8 @@ abstract class BaseBusinessAc<T : PageViewModel> : AppCompatActivity() {
         initListener()
 
         initObserve()
+
+        viewModel.loadData()
     }
 
     private fun initViewInternal() {
@@ -88,9 +108,18 @@ abstract class BaseBusinessAc<T : PageViewModel> : AppCompatActivity() {
         dispatchPageState(initPageState())
     }
 
-    open fun initPageState() = PageState.LOADING_OF_BOTTOM
+    open fun initPageState() = PageState.Content
+
+    inline fun <T> beginCoroutinesIO(params: T, crossinline callback: (T) -> Unit) {
+        lifecycleScope.launch {
+            withContext(Dispatchers.IO) {
+                callback.invoke(params)
+            }
+        }
+    }
 
     fun dispatchPageState(pageState: PageState) {
         viewModel.dispatchPageState(PageViewModel.KEY_PAGE_STATE, pageState)
     }
+
 }

@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hiy.monbie.core.BaseBusinessAc
 import com.hiy.monbie.core.PageViewModel
 import com.hiy.soda.R
-import com.hiy.soda.helper.ItemClickSupport
 import com.hiy.soda.helper.SodaConstant
 import com.hiy.soda.helper.startup.GsonHelper
 import com.hiy.soda.ui.adapter.BaseViewHolder
@@ -100,6 +99,10 @@ class PagingViewModel : PageViewModel() {
 
     override fun getExternalStates(): Map<String, MutableResult<*>> {
         return mapOf()
+    }
+
+    override fun loadData() {
+
     }
 }
 

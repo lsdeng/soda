@@ -8,7 +8,6 @@
     android:orientation="vertical"
     tools:context=".ui.main.MainAc">
 
-
     <com.google.android.flexbox.FlexboxLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -21,21 +20,22 @@
         app:showDivider="middle">
 
         <TextView
-            android:id="@+id/wsc"
+            android:id="@+id/add_goods"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/round_default"
             android:gravity="center"
-            android:text="微"
+            android:text="添加商品"
             android:textColor="@color/white"
             android:textSize="24sp" />
 
         <TextView
+            android:id="@+id/goods_list"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/round_default"
             android:gravity="center"
-            android:text="微"
+            android:text="商品列表"
             android:textColor="@color/white"
             android:textSize="24sp" />
 
