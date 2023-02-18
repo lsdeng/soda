@@ -1,8 +1,6 @@
 package com.hiy.monbie.core
 
 import android.util.Log
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.Observer
 import com.kunminx.architecture.domain.message.MutableResult
 
 /**
@@ -16,19 +14,12 @@ open abstract class PageViewModel : BaseViewModel() {
         const val KEY_PAGE_STATE = "pageState"
     }
 
-    private val mutableResults = mutableMapOf<String, MutableResult<*>>()
 
     private val pageState: MutableResult<PageState> = MutableResult.Builder<PageState>()
         .setAllowNullValue(false)
         .create()
 
-    fun <T> observePageState(key: String, lifecycleOwner: LifecycleOwner, observer: Observer<T>) {
-        (mutableResults[key] as? MutableResult<T>)?.observe(lifecycleOwner, observer)
-    }
 
-    fun <T> dispatchPageState(key: String, value: T) {
-        (mutableResults[key] as? MutableResult<T> )?.postValue(value)
-    }
 
     open fun onActivityCreated() {
         Log.d(HiyHelper.tag, "initData")
@@ -44,5 +35,8 @@ open abstract class PageViewModel : BaseViewModel() {
      }
 
     abstract fun getExternalStates() : Map<String, MutableResult<*>>
+
+
+    abstract fun loadData()
 
 }

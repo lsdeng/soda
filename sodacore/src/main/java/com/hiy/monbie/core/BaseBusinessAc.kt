@@ -3,9 +3,8 @@ package com.hiy.monbie.core
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.FrameLayout
-import android.widget.RelativeLayout
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -20,7 +19,7 @@ import java.lang.reflect.ParameterizedType
  * created on :  2022/11/24 3:11 下午
  * desc:
  */
-abstract class BaseBusinessAc<T : PageViewModel> : AppCompatActivity() {
+abstract class BaseBusinessAc<T : PageViewModel> : BaseActivity() {
 
     private lateinit var contentContainer: FrameLayout
     private lateinit var loadingBottomContainer: View
@@ -30,7 +29,7 @@ abstract class BaseBusinessAc<T : PageViewModel> : AppCompatActivity() {
     abstract fun getContentLayoutId(): Int
 
     open fun getToolbarLayoutId(): Int {
-        return R.layout.layout_toolbar
+        return R.layout.soda_core_layout_toolbar
     }
 
     abstract fun onViewCreated(decorView: View)
@@ -54,7 +53,7 @@ abstract class BaseBusinessAc<T : PageViewModel> : AppCompatActivity() {
             contentContainer.addView(contentView)
         }
 
-        findViewById<RelativeLayout>(R.id.toolbar_container).apply {
+        findViewById<ViewGroup>(R.id.toolbar_container).apply {
             View.inflate(this@BaseBusinessAc, getToolbarLayoutId(), this)
             initToolbar(this)
         }
@@ -73,6 +72,10 @@ abstract class BaseBusinessAc<T : PageViewModel> : AppCompatActivity() {
 
         initObserve()
 
+        loadData()
+    }
+
+    open fun loadData() {
         viewModel.loadData()
     }
 
@@ -83,7 +86,7 @@ abstract class BaseBusinessAc<T : PageViewModel> : AppCompatActivity() {
     }
 
     private fun initInternal() {
-        viewModel.observePageState(PageViewModel.KEY_PAGE_STATE, this, Observer<PageState> {
+        viewModel.observeState(PageViewModel.KEY_PAGE_STATE, this, Observer<PageState> {
             when (it) {
                 PageState.LOADING_OF_BOTTOM -> {
                     contentContainer.visible(false)
@@ -105,7 +108,7 @@ abstract class BaseBusinessAc<T : PageViewModel> : AppCompatActivity() {
             }
         })
 
-        dispatchPageState(initPageState())
+        dispatchState(initPageState())
     }
 
     open fun initPageState() = PageState.Content
@@ -118,8 +121,8 @@ abstract class BaseBusinessAc<T : PageViewModel> : AppCompatActivity() {
         }
     }
 
-    fun dispatchPageState(pageState: PageState) {
-        viewModel.dispatchPageState(PageViewModel.KEY_PAGE_STATE, pageState)
+    fun dispatchState(pageState: PageState) {
+        viewModel.dispatchState(PageViewModel.KEY_PAGE_STATE, pageState)
     }
 
 }

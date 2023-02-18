@@ -19,7 +19,7 @@ android {
     }
 
 
-    resourcePrefix 'soda_core'
+    resourcePrefix 'soda_core_'
 
     buildTypes {
         release {

@@ -4,7 +4,6 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import com.hiy.soda.bean.dto.Goods
-import com.hiy.soda.bean.dto.User
 
 /**
  * auther: liusaideng
@@ -18,4 +17,8 @@ interface GoodsDao {
 
     @Insert
     fun insertAll(vararg goods: Goods)
+
+
+    @Query("DELETE FROM goods WHERE id=:goodsId")
+    fun delete(goodsId: String)
 }

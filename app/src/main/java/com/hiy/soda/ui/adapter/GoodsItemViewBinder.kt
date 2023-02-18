@@ -1,6 +1,7 @@
 package com.hiy.soda.ui.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
@@ -13,7 +14,7 @@ import com.hiy.soda.bean.dto.Goods
 import com.hiy.soda.helper.DateHelper
 import java.io.File
 
-class GoodsItemViewBinder : ItemViewBinder<Goods, BaseViewHolder>() {
+class GoodsItemViewBinder(var deleteListener : ((position: Int, view: View) -> Unit)?) : ItemViewBinder<Goods, BaseViewHolder>() {
 
     override fun onCreateViewHolder(inflater: LayoutInflater, parent: ViewGroup): BaseViewHolder {
         return BaseViewHolder(inflater.inflate(R.layout.list_item_goods, parent, false))
@@ -29,6 +30,10 @@ class GoodsItemViewBinder : ItemViewBinder<Goods, BaseViewHolder>() {
         holder.findById<TextView>(R.id.name_tv).text = item.name
         holder.findById<TextView>(R.id.date_tv).text = item.validPeriod?.let { DateHelper.convertTimeToDateStr(it) }.let {
             "有效期：${it}"
+        }
+
+        holder.findById<View>(R.id.delete_tv).setOnClickListener {
+            deleteListener?.invoke(holder.bindingAdapterPosition, it)
         }
 
     }

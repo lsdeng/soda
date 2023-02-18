@@ -50,10 +50,10 @@ class AddGoodsAc : BaseBusinessAc<AddGoodsVM>() {
     }
 
     override fun initObserve() {
-//        viewModel.observePageState<Goods>(AddGoodsVM.KEY_GOODS, this@AddGoodsAc, Observer {
+//        viewModel.observeState<Goods>(AddGoodsVM.KEY_GOODS, this@AddGoodsAc, Observer {
 //            viewModel.goods.value?.apply {
 //                this.name = it.toString()
-//                viewModel.dispatchPageState(AddGoodsVM.KEY_GOODS, this)
+//                viewModel.dispatchState(AddGoodsVM.KEY_GOODS, this)
 //            }
 //        })
     }
@@ -73,7 +73,7 @@ class AddGoodsAc : BaseBusinessAc<AddGoodsVM>() {
                     mTimeLayout.getContentView().text = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(ca.time)
                     viewModel.goods.value?.apply {
                         this.validPeriod = ca.time
-                        viewModel.dispatchPageState(AddGoodsVM.KEY_GOODS, this)
+                        viewModel.dispatchState(AddGoodsVM.KEY_GOODS, this)
                     }
                 }, mYear, mMonth, mDay).show()
             }
@@ -96,7 +96,7 @@ class AddGoodsAc : BaseBusinessAc<AddGoodsVM>() {
         mNameLayout.getContentView().addTextChangedListener {
             viewModel.goods.value?.apply {
                 this.name = it.toString()
-                viewModel.dispatchPageState(AddGoodsVM.KEY_GOODS, this)
+                viewModel.dispatchState(AddGoodsVM.KEY_GOODS, this)
             }
         }
 
@@ -109,28 +109,7 @@ class AddGoodsAc : BaseBusinessAc<AddGoodsVM>() {
     }
 
     override fun initToolbar(view: View) {
-        view.findViewById<TextView>(R.id.title_tv).text = "添加商品"
-        view.findViewById<TextView>(R.id.right_tv).apply {
-            text = "确定"
-            setOnClickListener {
-                if (viewModel.goods.value?.isValid() == true) {
-                    lifecycleScope.launch {
-                        withContext(Dispatchers.IO) {
-                            DBHelper.database.goodsDao().insertAll(viewModel.goods.value!!)
-                            DBHelper.database.goodsDao().getAll().onEach {
-                                GsonHelper.get().toJson(it).logger()
-                            }
-                            withContext(Dispatchers.Main) {
-                                finish()
 
-                            }
-                        }
-                    }
-                } else {
-                    Toast.makeText(this@AddGoodsAc, "xxx", Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -140,7 +119,7 @@ class AddGoodsAc : BaseBusinessAc<AddGoodsVM>() {
                 Glide.with(this@AddGoodsAc).load(it).into(mImageLayout.getContentView())
                 viewModel.goods.value?.apply {
                     this.path = PathHelper.getPath(this@AddGoodsAc, it)
-                    viewModel.dispatchPageState(AddGoodsVM.KEY_GOODS, this)
+                    viewModel.dispatchState(AddGoodsVM.KEY_GOODS, this)
                 }
             }
         }
