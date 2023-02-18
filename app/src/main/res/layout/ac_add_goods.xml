@@ -6,18 +6,27 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingHorizontal="16dp"
-    tools:context=".ui.AddGoodsAc">
+    android:showDividers="middle"
+    android:divider="@drawable/divider_default"
+    tools:context=".ui.GoodsAddAc">
 
     <com.hiy.soda.component.SodaEditLayout
+        android:paddingHorizontal="12dp"
+        android:background="@color/white"
         android:id="@+id/name_etl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <com.hiy.soda.component.SodaTextLayout
+        android:paddingHorizontal="12dp"
         android:id="@+id/time_tvl"
+        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
     <com.hiy.soda.component.SodaGalleryLayout
+        android:paddingHorizontal="12dp"
+        android:background="@color/white"
         android:id="@+id/image_gl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

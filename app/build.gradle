@@ -114,4 +114,6 @@ dependencies {
 
     api project(":anno")
     kapt project(":processor")
+
+    implementation 'com.zhihu.android:matisse:0.5.3-beta3'
 }

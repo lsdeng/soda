@@ -12,7 +12,7 @@ import com.hiy.soda.bean.dto.Goods
  */
 @Dao
 interface GoodsDao {
-    @Query("SELECT * FROM goods")
+    @Query("SELECT * FROM goods order by id desc ")
     fun getAll(): List<Goods>
 
     @Insert

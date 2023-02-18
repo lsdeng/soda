@@ -3,7 +3,6 @@ package com.hiy.soda.ui
 import android.app.Activity
 import android.content.Intent
 import android.view.View
-import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,6 +11,8 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.drakeet.multitype.MultiTypeAdapter
 import com.hiy.monbie.core.BaseBusinessAc
 import com.hiy.monbie.core.PageViewModel
+import com.hiy.monbie.core.ext.setToolbarRightText
+import com.hiy.monbie.core.ext.setToolbarTitle
 import com.hiy.soda.R
 import com.hiy.soda.bean.dto.Goods
 import com.hiy.soda.database.DBHelper
@@ -40,7 +41,11 @@ class GoodsListAc : BaseBusinessAc<GoodsListVM>() {
 
 
     override fun initToolbar(view: View) {
-        view.findViewById<TextView>(R.id.title_tv).text = "商品列表"
+        view.setToolbarTitle("商品列表")
+        view.setToolbarRightText("添加") {
+            GoodsAddAc.navAddGoods(this@GoodsListAc)
+        }
+
     }
 
     override fun getContentLayoutId(): Int {
@@ -76,6 +81,11 @@ class GoodsListAc : BaseBusinessAc<GoodsListVM>() {
         mGoodsVm.observeState<Int>(GoodsVM.KEY_DELETE, this@GoodsListAc, Observer {
             viewModel.fetchGoodsList()
         })
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.fetchGoodsList()
     }
 }
 
