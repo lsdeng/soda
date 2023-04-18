@@ -5,7 +5,9 @@ import android.content.Context
 import androidx.startup.AppInitializer
 import com.hiy.soda.helper.startup.WorkManagerInitializer
 import com.hiy.soda.helper.startup.WorkManagerInitializer1
+import dagger.hilt.android.HiltAndroidApp
 
+@HiltAndroidApp()
 class SodaApp : Application() {
 
     companion object Instance {

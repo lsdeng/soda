@@ -30,9 +30,9 @@ buildscript {
     }
     dependencies {
         classpath "com.android.tools.build:gradle:${versions.agp}"
-        classpath "com.bytedance.android.byteX:base-plugin:${versions.byteX_version}"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin_version}"
         classpath "io.realm.kotlin:gradle-plugin:${versions.realm}"
+        classpath 'com.google.dagger:hilt-android-gradle-plugin:2.45'
     }
 }
 
