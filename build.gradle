@@ -5,16 +5,13 @@ buildscript {
         maven {
             url "${rootDir}/repo"
         }
-        mavenCentral()
         maven {
             url 'https://maven.aliyun.com/repository/public/'
         }
         maven {
-            url 'https://maven.aliyun.com/repository/central'
+            url "https://artifact.bytedance.com/repository/byteX/"
         }
-        maven {
-            url 'https://maven.aliyun.com/repository/google/'
-        }
+        mavenCentral()
         maven {
             credentials {
                 username '632205d7287a2b849f0aa5e0'
@@ -33,6 +30,7 @@ buildscript {
     }
     dependencies {
         classpath "com.android.tools.build:gradle:${versions.agp}"
+        classpath "com.bytedance.android.byteX:base-plugin:${versions.byteX_version}"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin_version}"
         classpath "io.realm.kotlin:gradle-plugin:${versions.realm}"
     }

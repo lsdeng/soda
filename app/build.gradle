@@ -3,8 +3,11 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-parcelize'
     id 'kotlin-kapt'
-    id 'hiyplugin'
-//    id 'king'
+    id 'WscPlugin'
+}
+
+Wsc {
+    value  "Wsc"
 }
 
 

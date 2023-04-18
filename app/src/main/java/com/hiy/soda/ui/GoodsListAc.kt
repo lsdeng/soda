@@ -13,6 +13,7 @@ import com.hiy.monbie.core.BaseBusinessAc
 import com.hiy.monbie.core.PageViewModel
 import com.hiy.monbie.core.ext.setToolbarRightText
 import com.hiy.monbie.core.ext.setToolbarTitle
+import com.hiy.monbie.core.mvi.BaseMvi
 import com.hiy.soda.R
 import com.hiy.soda.bean.dto.Goods
 import com.hiy.soda.database.DBHelper
@@ -113,6 +114,4 @@ class GoodsListVM : PageViewModel() {
             }
         }
     }
-
-
 }
