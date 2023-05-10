@@ -17,7 +17,7 @@ android {
         minSdkVersion 21
         targetSdkVersion "${versions.compile}" as int
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
         ndk {
             abiFilters 'armeabi-v7a', 'arm64-v8a'
         }
@@ -34,15 +34,26 @@ android {
         }
     }
 
+    signingConfigs {
+        release {
+            storeFile file('../keys')  //路径
+            storePassword 'mnbvcxz0'
+            keyAlias 'hiy'
+            keyPassword 'mnbvcxz0'
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            manifestPlaceholders = [app_label:"苏打"]
+            manifestPlaceholders = [app_label:"苏打小记"]
+            signingConfig signingConfigs.release
         }
         debug {
             applicationIdSuffix ".debug"
             manifestPlaceholders = [app_label:"苏打-Debug "]
+            signingConfig signingConfigs.release
         }
     }
     compileOptions {
