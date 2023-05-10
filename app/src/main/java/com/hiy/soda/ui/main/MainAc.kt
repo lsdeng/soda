@@ -112,6 +112,7 @@ class MainAc : BaseBusinessAc<MainVm>() {
 
     override fun onResume() {
         super.onResume()
+
         mGoodsVm.queryGoodsTotal()
 //        lifecycleScope.launch {
 //            withContext(Dispatchers.IO) {

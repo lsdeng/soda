@@ -3,8 +3,13 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-parcelize'
     id 'kotlin-kapt'
-    id 'hiyplugin'
-//    id 'king'
+    id 'WscPlugin'
+    id 'com.google.dagger.hilt.android'
+}
+
+
+Wsc {
+    value  "Wsc"
 }
 
 
@@ -76,6 +81,7 @@ kapt {
         // Default is 100.
         option("-debug", 1)
     }
+    correctErrorTypes true
 }
 
 dependencies {
@@ -127,4 +133,7 @@ dependencies {
     kapt project(":processor")
 
     implementation 'com.zhihu.android:matisse:0.5.3-beta3'
+
+    implementation 'com.google.dagger:hilt-android:2.45'
+    kapt 'com.google.dagger:hilt-compiler:2.45'
 }

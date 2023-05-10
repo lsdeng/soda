@@ -1,6 +1,8 @@
 apply plugin: 'groovy'
 apply plugin: 'maven-publish'
 apply plugin: 'kotlin'
+apply plugin: 'java-gradle-plugin'
+
 
 repositories {
     maven {
@@ -15,12 +17,20 @@ repositories {
 }
 
 buildscript {
+    ext.kotlin_version = '1.6.10'
     repositories {
+        maven {
+            url 'https://maven.aliyun.com/repository/public/'
+        }
+
+        maven {
+            url 'https://maven.aliyun.com/repository/google'
+        }
         google()
         mavenCentral()
     }
     dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.10"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 
@@ -28,6 +38,19 @@ buildscript {
 dependencies {
     implementation gradleApi()
     implementation localGroovy()
-    implementation project(':hiyPlugin')
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+//    implementation project(':hiyPlugin')
+}
+
+gradlePlugin {
+    plugins {
+        greeting {
+            // 插件id
+            id = 'WscPlugin'
+            // 插件实现类
+            implementationClass = 'com.qima.kdt.plugin.WscPlugin'
+        }
+    }
 }
 
