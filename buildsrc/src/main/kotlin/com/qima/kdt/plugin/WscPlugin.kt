@@ -23,6 +23,7 @@ class WscPlugin : Plugin<Project> {
 
     override fun apply(target: Project) {
         target.rootProject.gradle.addBuildListener(object : BuildListener {
+
             override fun beforeSettings(settings: Settings) {
                 super.beforeSettings(settings)
                 logger("beforeSettings")

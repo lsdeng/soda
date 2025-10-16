@@ -1,5 +1,6 @@
 package com.hiy.soda.plugin
 
+import android.app.Application
 import android.util.Log
 import com.hiy.monbie.core.HiyHelper
 import com.hiy.soda.anno.IPlugin
@@ -21,5 +22,31 @@ class SodaPlugin : IPlugin {
 class HomePlugin : IPlugin {
     override fun onCreate() {
         Log.d(HiyHelper.tag_plugin, "onCreate")
+    }
+}
+
+// 在 app 模块的 Application 类中
+class MyApplication : Application() {
+    override fun onCreate() {
+        super.onCreate()
+
+        // 初始化所有插件
+        PluginManager.onCreate()
+    }
+}
+
+
+// 在 app 模块中
+@Plugin("LoggerPlugin")
+class LoggerPlugin : IPlugin {
+    override fun onCreate() {
+        println("LoggerPlugin is created!")
+    }
+}
+
+@Plugin("AnalyticsPlugin")
+class AnalyticsPlugin : IPlugin {
+    override fun onCreate() {
+        println("AnalyticsPlugin is created!")
     }
 }

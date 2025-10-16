@@ -4,7 +4,6 @@ plugins {
     id 'kotlin-parcelize'
     id 'kotlin-kapt'
     id 'WscPlugin'
-    id 'com.google.dagger.hilt.android'
 }
 
 
@@ -133,7 +132,4 @@ dependencies {
     kapt project(":processor")
 
     implementation 'com.zhihu.android:matisse:0.5.3-beta3'
-
-    implementation 'com.google.dagger:hilt-android:2.45'
-    kapt 'com.google.dagger:hilt-compiler:2.45'
 }

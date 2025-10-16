@@ -5,9 +5,7 @@ import android.content.Context
 import androidx.startup.AppInitializer
 import com.hiy.soda.helper.startup.WorkManagerInitializer
 import com.hiy.soda.helper.startup.WorkManagerInitializer1
-import dagger.hilt.android.HiltAndroidApp
 
-@HiltAndroidApp()
 class SodaApp : Application() {
 
     companion object Instance {
@@ -26,11 +24,7 @@ class SodaApp : Application() {
         AppInitializer.getInstance(applicationContext).initializeComponent(WorkManagerInitializer::class.java)
         AppInitializer.getInstance(applicationContext).initializeComponent(WorkManagerInitializer1::class.java)
 
-        Thread.setDefaultUncaughtExceptionHandler(object : Thread.UncaughtExceptionHandler {
-            override fun uncaughtException(t: Thread, e: Throwable) {
-            }
-
-        })
+        Thread.setDefaultUncaughtExceptionHandler { t, e -> }
     }
 
     override fun attachBaseContext(base: Context?) {
